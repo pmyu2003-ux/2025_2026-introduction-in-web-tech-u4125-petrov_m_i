@@ -1,5 +1,5 @@
 ---
-University: [Университет ИТМО](https://itmo.ru)
+University: [ITMO University](https://itmo.ru)
 Faculty: [Факультет технологического менеджмента и инноваций](https://ftmi.itmo.ru)
 Course: [Введение в веб технологии](https://itmo-ict-faculty.github.io/introduction-in-web-tech/)
 Year: 2025/2026
