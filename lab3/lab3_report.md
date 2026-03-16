@@ -8,7 +8,7 @@
 **Автор:** Петров Михаил Юрьевич  
 **Лабораторная:** Lab3  
 **Дата начала:** 14.03.2026  
-**Дата защиты:** _____._____.______  
+**Дата защиты:** 16.03.2026  
 
 ## Цель работы
 Научиться настраивать локальную систему мониторинга, собирать метрики с помощью Prometheus и создавать дашборды в Grafana для визуализации данных.
@@ -40,41 +40,41 @@
 Проверена доступность метрик по адресу http://localhost:9100/metrics.
 
 3. **Запуск Prometheus**
-Создан том prometheus-data.
-Запущен контейнер Prometheus с монтированием конфигурации:
-bash
-docker run -d \
-  --name prometheus \
-  --network monitoring \
-  -p 9090:9090 \
-  -v prometheus-data:/prometheus \
-  -v C:\Users\misha\devops-lab-petrov\prometheus:/etc/prometheus \
-  prom/prometheus \
-  --config.file=/etc/prometheus/prometheus.yml
+   - Создан том `prometheus-data`.
+   - Запущен контейнер Prometheus с монтированием конфигурации:
+     ```bash
+     docker run -d \
+       --name prometheus \
+       --network monitoring \
+       -p 9090:9090 \
+       -v prometheus-data:/prometheus \
+       -v C:\Users\misha\devops-lab-petrov\prometheus:/etc/prometheus \
+       prom/prometheus \
+       --config.file=/etc/prometheus/prometheus.yml
 Проверено состояние целей в веб-интерфейсе Prometheus (http://localhost:9090/targets) – обе цели UP.
 
 4. **Запуск Grafana**
-Создан том grafana-data.
-Запущен контейнер Grafana:
-bash
-docker run -d \
-  --name grafana \
-  --network monitoring \
-  -p 3000:3000 \
-  -v grafana-data:/var/lib/grafana \
-  -e "GF_SECURITY_ADMIN_PASSWORD=admin" \
-  grafana/grafana
+   - Создан том `grafana-data`.
+   - Запущен контейнер Grafana:
+     ```bash
+     docker run -d \
+       --name grafana \
+       --network monitoring \
+       -p 3000:3000 \
+       -v grafana-data:/var/lib/grafana \
+       -e "GF_SECURITY_ADMIN_PASSWORD=admin" \
+       grafana/grafana
 Интерфейс доступен по адресу http://localhost:3000 (логин/пароль: admin/admin).
 
 5. **Настройка Grafana**
-Добавлен источник данных Prometheus с URL http://prometheus:9090.
-Создан дашборд с панелью для метрики node_cpu_seconds_total.
-Сохранён дашборд с названием "System Monitoring".
+   - Добавлен источник данных Prometheus с URL `http://prometheus:9090`.
+   - Создан дашборд с панелью для метрики `node_cpu_seconds_total`.
+   - Сохранён дашборд с названием "System Monitoring".
 
 6. **Проверка работоспособности**
-Все три контейнера (node-exporter, prometheus, grafana) запущены.
-Prometheus успешно собирает метрики с Node Exporter.
-В Grafana отображаются графики.
+   - Все три контейнера (`node-exporter`, `prometheus`, `grafana`) запущены.
+   - Prometheus успешно собирает метрики с Node Exporter.
+   - В Grafana отображаются графики.
 
-Выводы
+## Выводы
 В ходе работы была развёрнута система мониторинга на основе Docker. Настроен сбор метрик хоста с помощью Node Exporter, их хранение в Prometheus и визуализация в Grafana. Полученные навыки позволяют мониторить состояние серверов и приложений.
